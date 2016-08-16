@@ -4,7 +4,7 @@
 
 ###Chapter 2
 
--Eucledian Distance Algorithm
--Pearson Coefficent
--Ranking Similarities
--Recommending Movies
+- Eucledian Distance Algorithm
+- Pearson Coefficent
+- Ranking Similarities
+- Recommending Movies
