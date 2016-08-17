@@ -1,7 +1,7 @@
 from recommendations import critics
 from pearson_coefficent import pearson_score
 
-def getSimilarPeople(data,person,n = 3):
+def getSimilarItems(data,person,n = 3):
     similarties = []
     similartiesMap = {}
     for other,value in data.items():
@@ -9,14 +9,13 @@ def getSimilarPeople(data,person,n = 3):
         similartiesMap[pearson_score(person,data[other])] = other
     similarties.sort()
     similarties.reverse()
-    print similarties
     topSimilarties = similarties[0:n]
     similarTopItemsMap = {}
     for similarity in topSimilarties:
         similarTopItemsMap[similartiesMap[similarity]] = similarity
     return similarTopItemsMap
-def recommendMovies(data,person):
-    similarItemsMap = getSimilarPeople(data,person)
+def recommendSimilarItems(data,person,n=5):
+    similarItemsMap = getSimilarItems(data,person,n)
     totalMap = {}
     simSumMap = {}
     for name,similarity in similarItemsMap.items():
@@ -35,9 +34,9 @@ def recommendMovies(data,person):
         recommendMap[total/simSumMap[item]] = item
     recomendations.sort()
     recomendations.reverse()
-    print recomendations[0]
-    return recommendMap[recomendations[0]]
+    if(len(recomendations) < n):
+        return (recommendMap,recomendations[0:len(recomendations)])
+    return (recommendMap,recomendations[0:n])
 
-
-
-print recommendMovies(critics,{'Lady in the Water': 3.0, 'Snakes on a Plane': 4.0, 'The Night Listener': 3.0,'You, Me and Dupree': 2.0})
+def getTopMatches(data,itemName):
+    return getSimilarItems(data,data[itemName])

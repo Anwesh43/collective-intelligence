@@ -27,5 +27,4 @@ def pearson_score(itemDictionary1,itemDictionary2):
     n = len(similar_items)
     num = psum-(sum1*sum2)/n
     dem = (sum1Sq-pow(sum1,2)/n)*(sum2Sq-pow(sum2,2)/n)
-    print dem
     return num/dem
